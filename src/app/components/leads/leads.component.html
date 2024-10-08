@@ -1,0 +1,32 @@
+<div class="leads-container">
+  <h2>Leads sem Vendedor</h2>
+  
+  <button class="accept-all-button" (click)="acceptAllLeads()">Aceitar Todos os Leads</button>
+  
+  <table class="leads-table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Aceitar</th>
+        <th>Nome</th>
+        <th>Email</th>
+        <th>Classe</th>
+        <th>Remover da lista</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let lead of leads">
+        <td>{{ lead.Id }}</td>
+        <td>
+          <button class="accept-button" (click)="acceptLead(lead.Id)">Aceitar</button>
+        </td>
+        <td>{{ lead.Nome }}</td>
+        <td>{{ lead.Email }}</td>
+        <td>{{ lead.Classe }}</td>
+        <td>
+          <button class="remove-button" (click)="removeLead(lead.Id)">Remover</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
