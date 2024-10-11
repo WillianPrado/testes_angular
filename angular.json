@@ -31,6 +31,13 @@
           },
           "configurations": {
             "production": {
+              "baseHref": "/testes_angular/" ,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
               "budgets": [
                 {
                   "type": "initial",
@@ -63,6 +70,7 @@
           },
           "configurations": {
             "production": {
+              
               "browserTarget": "angular_teste:build:production"
             },
             "development": {
@@ -97,5 +105,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "61ba91a3-7cd8-45be-ab5f-914a8f0f0840"
   }
 }
