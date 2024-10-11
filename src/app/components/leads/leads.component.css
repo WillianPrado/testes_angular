@@ -5,6 +5,13 @@
     background-color: #f9f9f9;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   }
+  .accepted {
+    background-color: #d4edda; /* Verde claro */
+  }
+  
+  .rejected {
+    background-color: #f8d7da; /* Vermelho claro */
+  }
   
   h2 {
     text-align: center;
@@ -66,15 +73,26 @@
     cursor: pointer;
     transition: background-color 0.3s;
   }
-  
+  .clock {
+    background-color: #e9edf0; /* Cor de fundo */
+    color: #45a049; /* Cor do texto */
+    padding: 10px 15px; /* Espaçamento interno */
+    margin-bottom: 20px; /* Margem inferior */
+    border: none;
+    border-radius: 5px; /* Bordas arredondadas */
+    cursor: default; /* Cursor padrão */
+    font-size: 16px; /* Tamanho do texto */
+    font-weight: bold; /* Deixa o texto mais "bold" */
+    display: block;
+    max-width: 100px; /* Define o tamanho máximo */
+    margin-left: 5px; /* Margem esquerda para separação */
+    transition: background-color 0.3s; /* Transição suave */
+  }
   .accept-button:hover {
     background-color: #0b7dda; /* Azul mais escuro */
   }
 
-  remove-button {
-
-  }
-
+  
   .remove-button {
     background-color: #f32121; /* Azul */
     color: white;
