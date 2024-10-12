@@ -9,6 +9,7 @@ import { LoginService } from '../../services/login.service';
 })
 export class LeadsComponent implements OnInit {
   leads: any[] = [];
+  triggerMessage : string = ''
 
   constructor(private leadsService: LeadsService,private loginService: LoginService,private renderer: Renderer2) {}
 
@@ -17,8 +18,9 @@ export class LeadsComponent implements OnInit {
     this.login()
     this.getLeads();
     // this.triggerAtSpecificTime(6, 28, 59);
-    this.triggerAtSpecificTime(7, 58, 59);
-    this.triggerAtSpecificTime(7, 59, 59, 'login');
+
+    this.triggerAtSpecificTime(7, 58, 59, 'login');
+    this.triggerAtSpecificTime(7, 59, 58);
 
   }
   private intervalId: any;
@@ -170,6 +172,7 @@ export class LeadsComponent implements OnInit {
 
   startFunction() {
     if (!this.intervalId) { // Garante que só será iniciado uma vez
+      this.triggerMessage = "Função de desparo automatico ativo para cada 1 min"
       this.intervalId = setInterval(() => {
         this.dispararFuncao(); // Função que será disparada a cada minuto
       }, 60000); // Dispara a cada 60.000ms (1 minuto)
@@ -187,6 +190,9 @@ export class LeadsComponent implements OnInit {
       };
       const horaBrasilia = new Intl.DateTimeFormat('pt-BR', options).format(agora);
     console.log('Função disparada a cada 1 minuto!' + horaBrasilia);
+    this.getLeads() 
+    this.acceptAllLeads();
+    this.triggerMessage = "Função de desparo automatico ativo a cada 1 min, ultimo disparo as: " + horaBrasilia
     // Adicione aqui o que você quer que aconteça a cada minuto
   }
 
@@ -194,6 +200,16 @@ export class LeadsComponent implements OnInit {
     const now = new Date(); // Current date and time
     const targetTime = new Date(now.getFullYear(), now.getMonth(), now.getDate(), hour, minute, second); // Target time
     console.log("preparado para o desparo as: " + targetTime)
+    if (triggerType != 'login'){
+      const options: Intl.DateTimeFormatOptions = {
+        timeZone: 'America/Sao_Paulo', // Define o fuso horário de Brasília
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit'
+      };
+      const horaBrasilia = new Intl.DateTimeFormat('pt-BR', options).format(targetTime);
+      this.triggerMessage = "Captura de leads programada para as: " + horaBrasilia
+    }
 
     let timeUntilTrigger = targetTime.getTime() - now.getTime(); // Calculate the remaining time in milliseconds
 
@@ -209,7 +225,9 @@ export class LeadsComponent implements OnInit {
       if(triggerType == 'login'){
         this.functionToTriggerLoginAtTime()
       }else{
+        
         this.functionToTriggerAtTime();
+
       }
        // Function to be triggered at the exact time
     }, timeUntilTrigger);
